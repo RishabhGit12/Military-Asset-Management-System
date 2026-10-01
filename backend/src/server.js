@@ -13,6 +13,7 @@ const A = 'admin', C = 'base_commander', L = 'logistics_officer';
 const wrap = fn => (req, res) => fn(req, res).catch(e => { console.error(e); res.status(500).json({ error: 'Server error' }); });
 const pos = n => Number.isInteger(n) && n > 0;
 
+app.get('/', (_req, res) => res.json({ status: 'ok', service: 'MAMS API' }));
 // ---------- Auth ----------
 app.post('/api/auth/login', wrap(async (req, res) => {
   const [u] = await q('SELECT * FROM users WHERE username=$1', [req.body.username]);
